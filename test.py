@@ -1,4 +1,20 @@
 import classifier
+import os
+
+def extractText(filepath):
+	file = open(filepath,"r")
+	text = file.read()
+	lines = text.split("\n")
+	return "\n".join(lines[lines.index("")+1:])
+		
 
 classificador = classifier.Classifier()
-classificador.classify("Agent Use Only. Employees and family members of Ann Arbor Annuity Exchange and the subsidiaries are ineligible. We don't want anybody to receive our mailing who does not wish to receive them. This is a professional communication sent to insurance professionals. To be removed from this mailing list, DO NOT REPLY to this message. Instead, go here: http://www.insurancemail.net Legal Notice <http://www.insuranceiq.com/legal.htm> ")
+easy_ham = os.listdir("easy_ham")
+if "cmds" in easy_ham : 
+	easy_ham.remove("cmds")
+easy_ham = easy_ham[1:2]
+for file in easy_ham:
+	text = extractText("easy_ham/"+file)
+	classificador.classify("what text can I test")
+	
+	

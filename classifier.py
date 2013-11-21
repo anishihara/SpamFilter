@@ -1,12 +1,17 @@
 import training_data
+import re
 
 class Classifier:
 	def classify(self,text,prior=0.5,c=10e-6):
-		words =  [splited.strip("\\'\".,:") for splited in text.split()]
+		""" Remove a pontuacao do texto """
+		words =  re.findall(r"[\w']+",text)
+		"""words = text.split()"""
+		print words
 		data = training_data.TrainingData()
 		spamLikehood = 1
 		hamLikehood = 1
 		for word in words:
+			print spamLikehood
 			""" Calculo de spam"""
 			if word in data.spam:
 				spamLikehood *= data.spam[word]
