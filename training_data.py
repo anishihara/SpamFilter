@@ -17,8 +17,3 @@ class TrainingData:
 				columns = line[0].split(',')
 				result[columns[0].strip('"')] = float(columns[3])
 		return result
-	"""
-	def load(self):
-		self.spam = self.getTrainingData(self.spamTrainingDataFilePath)
-		self.ham = self.getTrainingData(self.hamTrainingDataFilePath)
-	"""
