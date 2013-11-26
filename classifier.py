@@ -34,7 +34,8 @@ class Classifier:
 		# Remove numeros
 		text = re.sub("[0123456789]", "", text)
 		# Remove a pontuacao do texto
-		words = re.split("["+ string.punctuation + "\t\s]" ,text.lower())
+		punctuationRegex = "["+ string.punctuation + "\t\s]"
+		words = re.split(punctuationRegex ,text.lower())
 		# Remove stop words em ingles
 		words = [w for w in words if not w in self.stopwords]
 		words = Counter(words)
@@ -44,7 +45,7 @@ class Classifier:
 			if ocurrence > 1 and len (word)>2:
 				# Calculo do likehood em escala de log
 				if word in trainingData:
-					likehood += math.log(trainingData[word])
+					likehood += math.log(trainingData[word])*ocurrence
 				else:
-					likehood += math.log(c)
+					likehood += math.log(c)*ocurrence
 		return likehood + math.log(prior)
